@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sp_util/sp_util.dart';
 import 'pages/home_page.dart';
 import 'provider/locale_provider.dart';
 import 'provider/theme_provider.dart';
@@ -10,7 +9,7 @@ import 'package:oktoast/oktoast.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SpUtil.getInstance();
+  // await SpUtil.getInstance();
   runApp(MyApp());
 }
 

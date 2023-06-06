@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:ffcache/ffcache.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -15,9 +16,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // String _counter = "0";
   int _counter = 0;
 
-  void _incrementCounter() {
+  void _incrementCounter() async {
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -26,6 +28,21 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+
+    // final cache = FFCache(name: 'test');
+    //
+    // // initialize. most methods call init() internally if not initialized.
+    // // For web platform calling init() is required.
+    // await cache.init();
+    //
+    // // insert 'key':'value' pair
+    // await cache.setString('key', '1123456');
+    //
+    // // get value for 'key'
+    // final values = await cache.getString('key');
+    // setState(() {
+    //   _counter = values.toString();
+    // });
   }
 
   @override

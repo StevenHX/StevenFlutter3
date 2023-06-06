@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../res/constant.dart';
-import 'package:sp_util/sp_util.dart';
 
 class LocaleProvider extends ChangeNotifier {
   Locale? get locale {
-    final String locale = SpUtil.getString(Constant.locale) ?? '';
+    // final String locale = SpUtil.getString(Constant.locale) ?? '';
+    final String locale = '';
     switch (locale) {
       case 'zh':
         return const Locale('zh', 'CN');
@@ -17,8 +17,8 @@ class LocaleProvider extends ChangeNotifier {
   }
 
   void setLocale(String locale) {
-    SpUtil.putString(Constant.locale, locale);
-    print(SpUtil.getString(Constant.locale));
+    // SpUtil.putString(Constant.locale, locale);
+    // print(SpUtil.getString(Constant.locale));
     notifyListeners();
   }
 }

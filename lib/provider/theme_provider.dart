@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../res/constant.dart';
 import '../res/resources.dart';
-import 'package:sp_util/sp_util.dart';
 
 extension ThemeModeExtension on ThemeMode {
   String get value => <String>['System', 'Light', 'Dark'][index];
@@ -14,19 +13,21 @@ extension ThemeModeExtension on ThemeMode {
 class ThemeProvider extends ChangeNotifier {
 
   void syncTheme() {
-    final String theme = SpUtil.getString(Constant.theme) ?? '';
+    // final String theme = SpUtil.getString(Constant.theme) ?? '';
+    final String theme = '';
     if (theme.isNotEmpty && theme != ThemeMode.system.value) {
       notifyListeners();
     }
   }
 
   void setTheme(ThemeMode themeMode) {
-    SpUtil.putString(Constant.theme, themeMode.value);
+    // SpUtil.putString(Constant.theme, themeMode.value);
     notifyListeners();
   }
 
   ThemeMode getThemeMode(){
-    final String theme = SpUtil.getString(Constant.theme) ?? '';
+    // final String theme = SpUtil.getString(Constant.theme) ?? '';
+    final String theme = '';
     switch(theme) {
       case 'Dark':
         return ThemeMode.dark;
