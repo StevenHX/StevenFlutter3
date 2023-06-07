@@ -39,7 +39,7 @@ dependencies:
   fluent_ui: ^4.4.0
   oktoast: ^3.3.1
   provider: ^6.0.5
-#  ffcache: ^1.1.0
+  sp_util: ^2.0.3
 
 dev_dependencies:
   flutter_test:
