@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import './page/my_router.dart';
 
 import 'i_router.dart';
 import 'not_found_page.dart';
@@ -23,7 +24,7 @@ class Routes {
     _listRouter.clear();
     /// 各自路由由各自模块管理，统一在此添加初始化
     // _listRouter.add(LoginRouter());
-    // _listRouter.add(MyRouter());
+    _listRouter.add(MyRouter());
 
     /// 初始化路由
     void initRouter(IRouterProvider routerProvider) {

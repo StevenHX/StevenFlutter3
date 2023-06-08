@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/main_page.dart';
-import 'package:fluttertest/pages/my_page.dart';
+import 'package:fluttertest/pages/mine/my_page.dart';
 import '../widgets/load_image.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
