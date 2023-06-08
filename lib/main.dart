@@ -5,6 +5,7 @@ import 'provider/locale_provider.dart';
 import 'provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
+import 'route/routers.dart';
 import 'utils/toast_utils.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -16,7 +17,9 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   DateTime? _lastPressedAt;
-  MyApp({super.key});
+  MyApp({Key? key}): super(key: key) {
+    Routes.initRoutes();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,7 @@ class MyApp extends StatelessWidget {
       theme: provider.getTheme(),
       darkTheme: provider.getTheme(isDarkMode: true),
       themeMode: provider.getThemeMode(),
-      // onGenerateRoute: Routes.router.generator,
+      onGenerateRoute: Routes.router.generator,
       localizationsDelegates: DeerLocalizations.localizationsDelegates,
       supportedLocales: DeerLocalizations.supportedLocales,
       locale: localeProvider.locale,
