@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
 import 'package:fluttertest/pages/main_page.dart';
 import 'package:fluttertest/pages/mine/my_page.dart';
 import '../widgets/load_image.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -21,38 +23,42 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget? currentPage;
   int currentIndex = 0;
   final List<Widget> _tabs = [const MainPage(), const MyPage()];
-  final List<BottomNavigationBarItem> _bottomTabs = [
-     const BottomNavigationBarItem(
-      icon: LoadAssetImage(
-        'home',
-        width: 28.0,
-        height: 28.0,
-        fit: BoxFit.cover,
+
+   List<BottomNavigationBarItem> _bottomTabs(BuildContext context) {
+    return [
+      BottomNavigationBarItem(
+        icon: const LoadAssetImage(
+          'home',
+          width: 28.0,
+          height: 28.0,
+          fit: BoxFit.cover,
+        ),
+        activeIcon: const LoadAssetImage(
+          'home_press',
+          width: 28.0,
+          height: 28.0,
+          fit: BoxFit.cover,
+        ),
+        label: DeerLocalizations.of(context)?.home,
       ),
-      activeIcon: LoadAssetImage(
-        'home_press',
-        width: 28.0,
-        height: 28.0,
-        fit: BoxFit.cover,
-      ),
-      label: '首页',
-    ),
-    const BottomNavigationBarItem(
-      icon: LoadAssetImage(
-        'me',
-        width: 28.0,
-        height: 28.0,
-        fit: BoxFit.cover,
-      ),
-      activeIcon: LoadAssetImage(
-        'me_press',
-        width: 28.0,
-        height: 28.0,
-        fit: BoxFit.cover,
-      ),
-      label: '我的',
-    )
-  ];
+      BottomNavigationBarItem(
+        icon: const LoadAssetImage(
+          'me',
+          width: 28.0,
+          height: 28.0,
+          fit: BoxFit.cover,
+        ),
+        activeIcon: const LoadAssetImage(
+          'me_press',
+          width: 28.0,
+          height: 28.0,
+          fit: BoxFit.cover,
+        ),
+        label: DeerLocalizations.of(context)?.mine,
+      )
+    ];
+  }
+
   @override
   void initState() {
     super.initState();
@@ -66,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
-        items: _bottomTabs,
+        items: _bottomTabs(context),
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         onTap: (index) {

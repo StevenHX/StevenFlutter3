@@ -106,5 +106,11 @@
     "description": "Registered Tips",
     "type": "text",
     "placeholders": {}
-  }
+  },
+  "home": "home",
+  "mine": "mine",
+  "mineTip1": "Night Mode",
+  "mineTip2": "Languages",
+  "mineTip3": "About",
+  "mineTip4": "Mine Collect"
 }

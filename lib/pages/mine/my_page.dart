@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
+import '../../route/page/login_router.dart';
 import '/route/fluro_navigator.dart';
 import '../../route/page/my_router.dart';
 import '../../widgets/common_views.dart';
@@ -72,7 +73,7 @@ class _MyPage extends State<MyPage> {
                       fit: BoxFit.cover,
                     ),
                     viewSpace(width: 30),
-                    Text(mineItemList[0].title,
+                    Text( DeerLocalizations.of(context)!.mineTip4,
                         style: const TextStyle(fontSize: 14)),
                   ],
                 ),
@@ -98,7 +99,7 @@ class _MyPage extends State<MyPage> {
                         fit: BoxFit.cover,
                       ),
                       viewSpace(width: 30),
-                      Text(mineItemList[1].title,
+                      Text(DeerLocalizations.of(context)!.mineTip1,
                           style: const TextStyle(fontSize: 14)),
                     ],
                   ),
@@ -125,7 +126,7 @@ class _MyPage extends State<MyPage> {
                         fit: BoxFit.cover,
                       ),
                       viewSpace(width: 30),
-                      Text(mineItemList[2].title,
+                      Text(DeerLocalizations.of(context)!.mineTip2,
                           style: const TextStyle(fontSize: 14)),
                     ],
                   ),
@@ -150,7 +151,7 @@ class _MyPage extends State<MyPage> {
                       fit: BoxFit.cover,
                     ),
                     viewSpace(width: 30),
-                    Text(mineItemList[3].title,
+                    Text(DeerLocalizations.of(context)!.mineTip3,
                         style: const TextStyle(fontSize: 14)),
                   ],
                 ),
@@ -219,11 +220,14 @@ class _MyPage extends State<MyPage> {
                     centerTitle: false,
                     collapseMode: CollapseMode.parallax,
                     titlePadding: const EdgeInsets.only(left: 15),
-                    title: const Text("HuangXiao",
-                        style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.orange,
-                            fontWeight: FontWeight.bold)),
+                    title: GestureDetector(
+                      onTap: () {  NavigatorUtils.push(context, LoginRouter.loginPage); },
+                      child:  const Text("HuangXiao",
+                      style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.orange,
+                      fontWeight: FontWeight.bold)),
+                    ),
                     background: Image.network(
                       'https://t7.baidu.com/it/u=2061716906,3574604343&fm=193&f=GIF',
                       fit: BoxFit.fill,

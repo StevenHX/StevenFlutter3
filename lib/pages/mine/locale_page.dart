@@ -46,7 +46,6 @@ class _LocalePageState extends State<LocalePage> {
             onTap: () {
               final String locale = index == 0 ? '' : (index == 1 ? 'zh' : 'en');
               context.read<LocaleProvider>().setLocale(locale);
-              Toast.show('当前功能仅登录模块有效');
               setState(() {});
             },
             child: Container(
