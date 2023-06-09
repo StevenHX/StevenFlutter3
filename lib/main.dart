@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/pages/splash_page.dart';
 import 'package:sp_util/sp_util.dart';
 import 'pages/home_page.dart';
 import 'provider/locale_provider.dart';
@@ -16,7 +17,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  DateTime? _lastPressedAt;
+  // DateTime? _lastPressedAt;
   MyApp({Key? key}): super(key: key) {
     Routes.initRoutes();
   }
@@ -60,20 +61,22 @@ class MyApp extends StatelessWidget {
           child: child!,
         );
       },
-      home: WillPopScope(
-        child: const MyHomePage(),
-        onWillPop: () async {
-          if (_lastPressedAt == null ||
-              DateTime.now().difference(_lastPressedAt!) >
-                  const Duration(seconds: 1)) {
-            //两次点击间隔超过1秒则重新计时
-            _lastPressedAt = DateTime.now();
-            Toast.show("再按一次，退出应用！");
-            return false;
-          }
-          return true;
-        },
-      ),
+      home: const SplashPage()
+
+      // WillPopScope(
+      //   child: const SplashPage(),
+      //   onWillPop: () async {
+      //     if (_lastPressedAt == null ||
+      //         DateTime.now().difference(_lastPressedAt!) >
+      //             const Duration(seconds: 1)) {
+      //       //两次点击间隔超过1秒则重新计时
+      //       _lastPressedAt = DateTime.now();
+      //       Toast.show("再按一次，退出应用！");
+      //       return false;
+      //     }
+      //     return true;
+      //   },
+      // ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
 import 'package:fluttertest/pages/main_page.dart';
 import 'package:fluttertest/pages/mine/my_page.dart';
+import '../utils/toast_utils.dart';
 import '../widgets/load_image.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -20,6 +21,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  DateTime? _lastPressedAt;
   Widget? currentPage;
   int currentIndex = 0;
   final List<Widget> _tabs = [const MainPage(), const MyPage()];
@@ -67,21 +69,35 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: currentPage,
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex,
-        items: _bottomTabs(context),
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-            currentPage = _tabs[currentIndex];
-          });
+    return
+      WillPopScope(
+        child: Scaffold(
+          body: currentPage,
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: currentIndex,
+            items: _bottomTabs(context),
+            selectedItemColor: Colors.blue,
+            unselectedItemColor: Colors.grey,
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+                currentPage = _tabs[currentIndex];
+              });
+            },
+          ),
+        ),
+        onWillPop: () async {
+          if (_lastPressedAt == null ||
+              DateTime.now().difference(_lastPressedAt!) >
+                  const Duration(seconds: 1)) {
+            //两次点击间隔超过1秒则重新计时
+            _lastPressedAt = DateTime.now();
+            Toast.show("再按一次，退出应用！");
+            return false;
+          }
+          return true;
         },
-      ),
-    );
+      );
   }
 }

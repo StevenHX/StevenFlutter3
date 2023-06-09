@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertest/route/page/home_router.dart';
 import 'package:fluttertest/route/page/login_router.dart';
 import './page/my_router.dart';
 
@@ -24,6 +25,7 @@ class Routes {
 
     _listRouter.clear();
     /// 各自路由由各自模块管理，统一在此添加初始化
+    _listRouter.add(HomeRouter());
     _listRouter.add(LoginRouter());
     _listRouter.add(MyRouter());
 
