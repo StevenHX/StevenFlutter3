@@ -7,12 +7,15 @@ import 'routers.dart';
 class NavigatorUtils {
 
   static void push(BuildContext context, String path,
-      {bool replace = false, bool clearStack = false, Object? arguments}) {
+      {bool replace = false, bool clearStack = false,
+        TransitionType transitionType = TransitionType.native,
+        Object? arguments
+      }) {
     unfocus();
     Routes.router.navigateTo(context, path,
       replace: replace,
       clearStack: clearStack,
-      transition: TransitionType.native,
+      transition: transitionType,
       routeSettings: RouteSettings(
         arguments: arguments,
       ),

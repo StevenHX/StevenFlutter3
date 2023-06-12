@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertest/route/page/home_router.dart';
 import 'package:fluttertest/utils/image_utils.dart';
@@ -21,9 +22,8 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     _subscription = Stream.periodic(const Duration(seconds: 1), (int i) => i).take(3).listen((int i) {
-      print(i);
       if (i == 3 - 1) {
-        NavigatorUtils.push(context, HomeRouter.homePage, replace: true);
+        NavigatorUtils.push(context, HomeRouter.homePage, replace: true, transitionType: TransitionType.cupertino);
         _subscription?.cancel();
       }
     });

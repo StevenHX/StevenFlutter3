@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
-import 'package:fluttertest/pages/main_page.dart';
+import 'package:fluttertest/pages/home/main_page.dart';
 import 'package:fluttertest/pages/mine/my_page.dart';
 import '../utils/toast_utils.dart';
 import '../widgets/load_image.dart';

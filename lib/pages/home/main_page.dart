@@ -1,4 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
+import '../../http/dio_method.dart';
+import '../../http/dio_response.dart';
+import '../../http/dio_util.dart';
+import '../../model/banner_model.dart';
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
   @override
@@ -7,7 +13,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _counter = 0;
-
+  final CancelToken _cancelToken = CancelToken();
   void _incrementCounter() async {
     setState(() {
       _counter++;
@@ -75,8 +81,12 @@ class _MainPageState extends State<MainPage> {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.green),
                 ),
-                onPressed: (){
-                  print("没有传递回调函数");
+                onPressed: ()async {
+                  DioUtil.getInstance()?.openLog();
+                  DioResponse response = await DioUtil().request("/banner/json",
+                      method: DioMethod.get, cancelToken: _cancelToken);
+                  BannerModel banner = BannerModel.fromJson(response.data);
+                  print(banner.toString());
                 },
                 child: const Text("提交", style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
               ),
