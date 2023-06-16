@@ -1,12 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertest/pages/home/DownloadController.dart';
+import 'package:fluttertest/widgets/download_button.dart';
 
 import '../../http/dio_method.dart';
 import '../../http/dio_response.dart';
 import '../../http/dio_util.dart';
 import '../../model/banner_model.dart';
+
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
+
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -14,10 +18,19 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _counter = 0;
   final CancelToken _cancelToken = CancelToken();
+
   void _incrementCounter() async {
     setState(() {
       _counter++;
     });
+  }
+
+  late final DownloadController downloadController;
+
+  @override
+  void initState() {
+    super.initState();
+    downloadController = DownloadController(onOpenDownload: () {});
   }
 
   @override
@@ -25,7 +38,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title:  const Text(
+        title: const Text(
           'flutter',
         ),
       ),
@@ -46,10 +59,14 @@ class _MainPageState extends State<MainPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        orientation == Orientation.landscape ? "横屏" : "竖屏",
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
+                      AnimatedBuilder(animation: downloadController, builder: (context, child) {
+                        return  DownloadButton(
+                            status: downloadController.downloadStatus,
+                            downloadProgress: downloadController.progress,
+                            onDownload: downloadController.startDownload,
+                            onOpen: downloadController.openDownload,
+                            onCancel: downloadController.stopDownload);
+                      }),
                     ],
                   ),
                 );
@@ -60,15 +77,16 @@ class _MainPageState extends State<MainPage> {
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
+                   Text(
                     '点击登录，即表示以阅读并同意',
                     style: TextStyle(
                         fontSize: 12, color: Color.fromRGBO(153, 153, 153, 1)),
                   ),
-                  InkWell(
+                   InkWell(
                     child: Text(
                       '《会员服务条款》',
-                      style: TextStyle(color: Color.fromRGBO(85, 122, 157, 1), fontSize: 12),
+                      style: TextStyle(
+                          color: Color.fromRGBO(85, 122, 157, 1), fontSize: 12),
                     ),
                   )
                 ],
@@ -81,14 +99,17 @@ class _MainPageState extends State<MainPage> {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.green),
                 ),
-                onPressed: ()async {
+                onPressed: () async {
                   DioUtil.getInstance()?.openLog();
                   DioResponse response = await DioUtil().request("/banner/json",
                       method: DioMethod.get, cancelToken: _cancelToken);
                   BannerModel banner = BannerModel.fromJson(response.data);
                   print(banner.toString());
                 },
-                child: const Text("提交", style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
+                child: const Text(
+                  "提交",
+                  style: TextStyle(fontSize: 16, color: Color(0xffffffff)),
+                ),
               ),
             )
           ],
