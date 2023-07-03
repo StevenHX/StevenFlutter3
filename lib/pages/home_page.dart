@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart' hide Colors;
 import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
 import 'package:fluttertest/pages/home/main_page.dart';
+import 'package:fluttertest/pages/mine/locale_page.dart';
 import 'package:fluttertest/pages/mine/my_page.dart';
+import 'package:fluttertest/pages/mine/theme_page.dart';
+import 'package:fluttertest/res/resources.dart';
+import '../utils/device_utils.dart';
 import '../utils/toast_utils.dart';
 import '../widgets/load_image.dart';
 
@@ -24,9 +29,10 @@ class _MyHomePageState extends State<MyHomePage> {
   DateTime? _lastPressedAt;
   Widget? currentPage;
   int currentIndex = 0;
+  int index = 0;
   final List<Widget> _tabs = [const MainPage(), const MyPage()];
 
-   List<BottomNavigationBarItem> _bottomTabs(BuildContext context) {
+  List<BottomNavigationBarItem> _bottomTabs(BuildContext context) {
     return [
       BottomNavigationBarItem(
         icon: const LoadAssetImage(
@@ -61,6 +67,50 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
   }
 
+  /// 宽屏显示布局
+  Widget widerBuildLayout(BuildContext context) {
+    return NavigationView(
+      appBar: const NavigationAppBar(leading: Icon(FluentIcons.cat),title: Text("HuangXiao",style: TextStyles.textBold14,)),
+      pane: NavigationPane(
+          selected: index,
+          onChanged: (i) => setState(() => index = i),
+          displayMode: PaneDisplayMode.open,
+          size: const NavigationPaneSize(
+            openWidth: 130,
+          ),
+          indicator: const EndNavigationIndicator(),
+          items: [
+            PaneItem(
+                icon: const Icon(FluentIcons.icon_sets_flag),
+                title: const Text("首页"),
+                body: const Text("11")),
+            PaneItemSeparator(),
+            PaneItem(
+                icon: const Icon(FluentIcons.e_discovery),
+                title: const Text("新闻"),
+                body: const Text("11")),
+            PaneItem(
+                icon: const Icon(FluentIcons.flow_template),
+                title: const Text("工具"),
+                body: const Text("11")),
+          ],
+          footerItems: [
+            PaneItem(
+                icon: const Icon(FluentIcons.locale_language),
+                title: const Text("语言"),
+                body: const LocalePage()),
+            PaneItem(
+                icon: const Icon(FluentIcons.sunny),
+                title: const Text("夜间模式"),
+                body: const ThemePage()),
+            PaneItem(
+                icon: const Icon(FluentIcons.accounts),
+                title: const Text("关于"),
+                body: const Text("11"))
+          ]),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -69,35 +119,40 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return
-      WillPopScope(
-        child: Scaffold(
-          body: currentPage,
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: currentIndex,
-            items: _bottomTabs(context),
-            selectedItemColor: Colors.blue,
-            unselectedItemColor: Colors.grey,
-            onTap: (index) {
-              setState(() {
-                currentIndex = index;
-                currentPage = _tabs[currentIndex];
-              });
-            },
-          ),
-        ),
-        onWillPop: () async {
-          if (_lastPressedAt == null ||
-              DateTime.now().difference(_lastPressedAt!) >
-                  const Duration(seconds: 1)) {
-            //两次点击间隔超过1秒则重新计时
-            _lastPressedAt = DateTime.now();
-            Toast.show("再按一次，退出应用！");
-            return false;
-          }
-          return true;
-        },
-      );
+    return WillPopScope(
+      child: OrientationBuilder(builder: (context, orientation) {
+        if (Device.isLargeScreen(context)) {
+          return widerBuildLayout(context);
+        } else {
+          return Scaffold(
+            body: currentPage,
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: currentIndex,
+              items: _bottomTabs(context),
+              selectedItemColor: Colors.blue,
+              unselectedItemColor: Colors.grey,
+              onTap: (index) {
+                setState(() {
+                  currentIndex = index;
+                  currentPage = _tabs[currentIndex];
+                });
+              },
+            ),
+          );
+        }
+      }),
+      onWillPop: () async {
+        if (_lastPressedAt == null ||
+            DateTime.now().difference(_lastPressedAt!) >
+                const Duration(seconds: 1)) {
+          //两次点击间隔超过1秒则重新计时
+          _lastPressedAt = DateTime.now();
+          Toast.show("再按一次，退出应用！");
+          return false;
+        }
+        return true;
+      },
+    );
   }
 }

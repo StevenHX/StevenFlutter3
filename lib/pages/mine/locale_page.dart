@@ -4,6 +4,7 @@ import 'package:sp_util/sp_util.dart';
 
 import '../../provider/locale_provider.dart';
 import '../../res/constant.dart';
+import '../../utils/device_utils.dart';
 import '../../utils/toast_utils.dart';
 import '../../widgets/my_app_bar.dart';
 
@@ -35,8 +36,9 @@ class _LocalePageState extends State<LocalePage> {
         break;
     }
     return Scaffold(
-      appBar: const MyAppBar(
+      appBar: MyAppBar(
         title: '多语言',
+        isBack: !Device.isLargeScreen(context),
       ),
       body: ListView.separated(
         itemCount: _list.length,

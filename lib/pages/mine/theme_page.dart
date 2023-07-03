@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/utils/device_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:sp_util/sp_util.dart';
 
@@ -34,8 +35,9 @@ class _ThemePageState extends State<ThemePage> {
         break;
     }
     return Scaffold(
-      appBar: const MyAppBar(
-        title: '夜间模式'
+      appBar: MyAppBar(
+        title: '夜间模式',
+        isBack: !Device.isLargeScreen(context),
       ),
       body: ListView.separated(
         itemCount: _list.length,

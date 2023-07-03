@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 /// https://medium.com/gskinner-team/flutter-simplify-platform-screen-size-detection-4cb6fc4f7ed1
 class Device {
@@ -14,4 +15,10 @@ class Device {
   static bool get isFuchsia => !isWeb && Platform.isFuchsia;
   static bool get isIOS => !isWeb && Platform.isIOS;
 
+  /// 判断界面是不是 大屏
+  static isLargeScreen(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double width = size.width > size.height ? size.height : size.width;
+    return width > 600;
+  }
 }

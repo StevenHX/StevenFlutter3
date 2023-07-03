@@ -1,13 +1,12 @@
+import 'package:fluent_ui/fluent_ui.dart' hide Colors;
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/splash_page.dart';
 import 'package:sp_util/sp_util.dart';
-import 'pages/home_page.dart';
 import 'provider/locale_provider.dart';
 import 'provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
 import 'route/routers.dart';
-import 'utils/toast_utils.dart';
 import 'package:oktoast/oktoast.dart';
 
 void main() async {
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
   }
 
   Widget buildApp(ThemeProvider provider, LocaleProvider localeProvider) {
-    return MaterialApp(
+    return FluentApp(
       title: 'Flutter Demo',
       theme: provider.getTheme(),
       darkTheme: provider.getTheme(isDarkMode: true),
@@ -62,21 +61,6 @@ class MyApp extends StatelessWidget {
         );
       },
       home: const SplashPage()
-
-      // WillPopScope(
-      //   child: const SplashPage(),
-      //   onWillPop: () async {
-      //     if (_lastPressedAt == null ||
-      //         DateTime.now().difference(_lastPressedAt!) >
-      //             const Duration(seconds: 1)) {
-      //       //两次点击间隔超过1秒则重新计时
-      //       _lastPressedAt = DateTime.now();
-      //       Toast.show("再按一次，退出应用！");
-      //       return false;
-      //     }
-      //     return true;
-      //   },
-      // ),
     );
   }
 }
