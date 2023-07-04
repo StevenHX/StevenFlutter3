@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/utils/theme_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:sp_util/sp_util.dart';
 
@@ -36,6 +37,7 @@ class _LocalePageState extends State<LocalePage> {
         break;
     }
     return Scaffold(
+      backgroundColor: ThemeUtils.getKeyboardActionsColor(context),
       appBar: MyAppBar(
         title: '多语言',
         isBack: !Device.isLargeScreen(context),

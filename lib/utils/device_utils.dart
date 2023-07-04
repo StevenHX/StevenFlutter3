@@ -17,8 +17,10 @@ class Device {
 
   /// 判断界面是不是 大屏
   static isLargeScreen(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double width = size.width > size.height ? size.height : size.width;
-    return width > 600;
+    // Size size = MediaQuery.of(context).size;
+    // double width = size.width > size.height ? size.height : size.width;
+    // print(width);
+    // print(MediaQuery.of(context).orientation);
+    return MediaQuery.of(context).orientation == Orientation.landscape;
   }
 }

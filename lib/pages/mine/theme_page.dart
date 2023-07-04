@@ -5,6 +5,7 @@ import 'package:sp_util/sp_util.dart';
 
 import '../../provider/theme_provider.dart';
 import '../../res/constant.dart';
+import '../../utils/theme_utils.dart';
 import '../../widgets/my_app_bar.dart';
 
 class ThemePage extends StatefulWidget {
@@ -35,6 +36,7 @@ class _ThemePageState extends State<ThemePage> {
         break;
     }
     return Scaffold(
+      backgroundColor: ThemeUtils.getKeyboardActionsColor(context),
       appBar: MyAppBar(
         title: '夜间模式',
         isBack: !Device.isLargeScreen(context),

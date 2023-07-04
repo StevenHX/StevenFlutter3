@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
+import 'package:fluttertest/utils/theme_utils.dart';
 import '../../route/page/login_router.dart';
 import '/route/fluro_navigator.dart';
 import '../../route/page/my_router.dart';
@@ -200,6 +201,7 @@ class _MyPage extends State<MyPage> {
     }
 
     return Scaffold(
+      backgroundColor: ThemeUtils.getKeyboardActionsColor(context),
       body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[

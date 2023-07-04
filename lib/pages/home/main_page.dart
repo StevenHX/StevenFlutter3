@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:fluent_ui/fluent_ui.dart' hide Colors,ButtonStyle;
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/home/DownloadController.dart';
+import 'package:fluttertest/utils/device_utils.dart';
+import 'package:fluttertest/utils/theme_utils.dart';
 import 'package:fluttertest/widgets/download_button.dart';
 
 import '../../http/dio_method.dart';
@@ -36,7 +39,8 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      backgroundColor: ThemeUtils.getKeyboardActionsColor(context),
+      appBar: Device.isLargeScreen(context)?null: AppBar(
         backgroundColor: Colors.blue,
         title: const Text(
           'flutter',

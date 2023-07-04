@@ -6,6 +6,7 @@ import 'package:fluttertest/pages/mine/locale_page.dart';
 import 'package:fluttertest/pages/mine/my_page.dart';
 import 'package:fluttertest/pages/mine/theme_page.dart';
 import 'package:fluttertest/res/resources.dart';
+import 'package:fluttertest/utils/theme_utils.dart';
 import '../utils/device_utils.dart';
 import '../utils/toast_utils.dart';
 import '../widgets/load_image.dart';
@@ -74,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
       pane: NavigationPane(
           selected: index,
           onChanged: (i) => setState(() => index = i),
-          displayMode: PaneDisplayMode.open,
+          displayMode: PaneDisplayMode.compact,
           size: const NavigationPaneSize(
             openWidth: 130,
           ),
@@ -83,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             PaneItem(
                 icon: const Icon(FluentIcons.icon_sets_flag),
                 title: const Text("首页"),
-                body: const Text("11")),
+                body: const MainPage()),
             PaneItemSeparator(),
             PaneItem(
                 icon: const Icon(FluentIcons.e_discovery),
@@ -127,6 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
           return Scaffold(
             body: currentPage,
             bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: ThemeUtils.getKeyboardActionsColor(context),
               type: BottomNavigationBarType.fixed,
               currentIndex: currentIndex,
               items: _bottomTabs(context),
